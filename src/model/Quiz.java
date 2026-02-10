@@ -22,15 +22,9 @@ public class Quiz {
     public void addQuestion(Question question) {
         questions.add(question);
     }
-
     public void removeQuestion(int index) {
         questions.remove(index);
     }
-
-    public void startQuiz() {
-        controller.askQuestion(getRandomQuestion());
-    }
-
 
     private Question getRandomQuestion() {
         return getQuestion(new Random().nextInt(questions.size()));
