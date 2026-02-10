@@ -10,18 +10,28 @@ public class MainPanel extends JPanel {
     }
     public void Panel(Controller controller) {
         JPanel p = new JPanel();
-        p.setLayout(new BorderLayout());
+        p.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         JButton quiz = new JButton("Quizmodus");
-        quiz.setActionCommand("quizmode");
+        quiz.setActionCommand("quiz");
         quiz.addActionListener(controller);
+
+        JButton game = new JButton("Spielmodus");
+        game.setActionCommand("game");
+        game.addActionListener(controller);
 
         JButton stats = new JButton("Übersicht");
         stats.setActionCommand("stats");
         stats.addActionListener(controller);
 
-        JButton game = new JButton("Spielmodus");
-        game.setActionCommand("game");
-        game.addActionListener(controller);
+        JButton create = new JButton("Fragen erstellen");
+        create.setActionCommand("create");
+        create.addActionListener(controller);
+
+        p.add(quiz);
+        p.add(game);
+        p.add(stats);
+        p.add(create);
+        this.add(p, BorderLayout.NORTH);
     }
 }

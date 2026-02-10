@@ -10,7 +10,7 @@ public class Frame extends JFrame {
         this.setSize(1280, 720);
         this.setResizable(true);
         this.setLocationRelativeTo(null);
-        this.add(panel, BorderLayout.CENTER);
         this.setVisible(true);
+        this.add(panel, BorderLayout.CENTER);
     }
 }
