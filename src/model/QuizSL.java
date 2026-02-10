@@ -22,7 +22,7 @@ public class QuizSL implements SaveLoad{
     @Override
     public Quiz load(String name) {
         Quiz q = null;
-        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(pfad + " " + name))){
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(pfad + File.pathSeparator + name))){
             q = (Quiz) ois.readObject();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -35,8 +35,8 @@ public class QuizSL implements SaveLoad{
     }
 
     @Override
-    public void save(Quiz q) {
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(pfad))){
+    public void save(Quiz q, String name) {
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(pfad + File.pathSeparator + name))){
             oos.writeObject(q);
         }catch (IOException e){
             throw new RuntimeException(e);
