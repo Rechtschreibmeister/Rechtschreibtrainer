@@ -1,5 +1,5 @@
 package view;
 
 public enum Commands {
-    quiz,game,stats,create;
+    quiz,game,stats,create,enter,hint;
 }
