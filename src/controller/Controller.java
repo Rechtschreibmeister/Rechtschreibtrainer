@@ -1,9 +1,7 @@
 package controller;
 
-import model.Question;
+import java.util.Random;
 
-public class Controller {
-    public String askQuestion(Question question) {
-        return "peter";
-    }
+public interface Controller {
+    Random getRandom();
 }
