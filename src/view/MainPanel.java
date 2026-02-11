@@ -1,5 +1,7 @@
 package view;
 
+import model.Question;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,10 +13,12 @@ public class MainPanel extends JPanel {
     public void Panel(Controller controller) {
         JPanel p = new JPanel();
         p.setLayout(new FlowLayout(FlowLayout.CENTER));
+        p.setBorder(BorderFactory.createLineBorder(Color.black));
 
         JButton quiz = new JButton("Quizmodus");
         quiz.setActionCommand("quiz");
         quiz.addActionListener(controller);
+
 
         JButton game = new JButton("Spielmodus");
         game.setActionCommand("game");
@@ -32,6 +36,7 @@ public class MainPanel extends JPanel {
         p.add(game);
         p.add(stats);
         p.add(create);
+
         this.add(p, BorderLayout.NORTH);
     }
 }
