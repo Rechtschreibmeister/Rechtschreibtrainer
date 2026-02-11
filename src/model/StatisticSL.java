@@ -2,21 +2,23 @@ package model;
 
 import java.io.*;
 
-public class StatisticSL{
+public class StatisticSL {
 
     public static final String DEFAULT_PATH = ".\\quizzes";
 
-    private String pfad;
+    private String path;
 
-    public StatisticSL(String pfad) {
-        this.pfad = pfad;
+
+    public StatisticSL(String path) {
+        this.path = path;
     }
 
-    public StatisticSL(){this.pfad = DEFAULT_PATH;}
+    public StatisticSL() {this.path = DEFAULT_PATH;}
+
 
     public Statistic load(String name) {
         Statistic s = null;
-        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(pfad + File.pathSeparator + name))){
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path + File.pathSeparator + name))){
             s = (Statistic) ois.readObject();
         } catch (ClassNotFoundException | IOException e) {
             throw new RuntimeException(e);
@@ -25,7 +27,7 @@ public class StatisticSL{
     }
 
     public void save(Statistic s, String name) {
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(pfad + File.pathSeparator+name))){
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path + File.pathSeparator+name))){
             oos.writeObject(s);
         }catch (IOException e){
             throw new RuntimeException(e);
