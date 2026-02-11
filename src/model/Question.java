@@ -15,4 +15,8 @@ public class Question {
         this.answer = answer;
         this.tips = tips;
     }
+
+    public String getAnswer() {
+        return answer;
+    }
 }

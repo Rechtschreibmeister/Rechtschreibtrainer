@@ -50,4 +50,8 @@ public class Quiz {
     public Question getQuestion(int index) {
         return questions.get(index);
     }
+
+    public ArrayList<Question> getQuestions() {
+        return questions;
+    }
 }
