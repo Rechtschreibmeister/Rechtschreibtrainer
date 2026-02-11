@@ -1,35 +1,28 @@
 package model;
 
 import controller.Controller;
+import java.util.Collections;
 
 public class GameMode extends Game {
     private static final int COMBO_TRIGGER = 2;
     private final double COMBO_MULTIPLIER = 1.2;
 
-    private int[] questionOrder;
-
+    private int currentCombo = 0;
 
     public GameMode(Quiz quiz, Statistic statistic, Controller controller) {
-        super(controller, quiz, statistic);
-        questionOrder = new int[quiz.getQuestions().size()];
-        for (int i = 0; i < quiz.getQuestions().size(); i++) {
-            questionOrder[i] = controller.getRandom();
+        Collections.shuffle(quiz.getQuestions(), controller.getRandom());
+        super(quiz, statistic);
+    }
+
+    @Override
+    protected void increaseScore(boolean isCorrect) {
+        if (!isCorrect) {
+            currentCombo = 0;
+            return;
         }
-    }
-
-
-    @Override
-    public Question nextQuestion() {
-
-    }
-
-    @Override
-    public boolean checkAnswer(String answer) {
-        return false;
-    }
-
-    @Override
-    public int getScore() {
-        return 0;
+        currentCombo++;
+        if (currentCombo >= COMBO_TRIGGER) {
+            addToScore(SCORE_PER_QUESTION * (int) Math.pow(COMBO_MULTIPLIER, currentCombo));
+        }
     }
 }
