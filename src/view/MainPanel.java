@@ -14,15 +14,34 @@ public class MainPanel extends JPanel {
     }
 
     public void Panel(Controller controller) {
-        JMenuBar mB = new JMenuBar();
-        JMenu m = new JMenu("Start");
+        JMenuBar menuBar = new JMenuBar();
+        JMenu[] subMenu = new JMenu[] {new JMenu("Start"), new  JMenu("Statistik"), new JMenu("Hilfe")};
 
-        m.add(new JMenuItem("Quiz starten"));
-        m.add(new JMenuItem("Spiel starten"));
-        m.add(new JMenuItem("Quiz erstellen"));
-        mB.add(m);
+        subMenu[1].addActionListener(controller);
+        subMenu[1].setActionCommand(Commands.stats.name());
 
-        this.add(mB,  BorderLayout.NORTH);
+        JMenuItem[] menuItem = new JMenuItem[] {new JMenuItem("Quiz starten"), new JMenuItem("Spiel starten"), new JMenuItem("Quiz erstellen"), new JMenuItem("Github"), new JMenuItem("Zur Anleitung")};
+        for(JMenuItem menu : menuItem) {
+            menu.addActionListener(controller);
+        }
+        menuItem[0].setActionCommand(Commands.quiz.name());
+        menuItem[1].setActionCommand(Commands.game.name());
+        menuItem[2].setActionCommand(Commands.create.name());
+        menuItem[3].setActionCommand(Commands.github.name());
+        menuItem[4].setActionCommand(Commands.help.name());
+
+        for (int i = 0; i <= 2; i++) {
+            subMenu[0].add(menuItem[i]);
+        }
+
+        subMenu[2].add(menuItem[3]);
+        subMenu[2].add(menuItem[4]);
+
+        menuBar.add(subMenu[0]);
+        menuBar.add(subMenu[1]);
+        menuBar.add(subMenu[2]);
+
+        this.add(menuBar,  BorderLayout.NORTH);
     }
 
     public void setCenterPanel(JPanel j) {
