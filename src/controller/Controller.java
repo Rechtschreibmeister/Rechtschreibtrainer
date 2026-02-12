@@ -1,6 +1,6 @@
 package controller;
 
-import java.awt.event.ActionListener;
+import model.Question;
 
 public interface Controller{
 }
