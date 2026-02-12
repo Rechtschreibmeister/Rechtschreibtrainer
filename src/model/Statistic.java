@@ -23,7 +23,8 @@ public class Statistic {
     }
 
     public double getCorrectPercentage() {
-        return (double) totalQuestions / (double) questionsCorrect * 100;
+        if(totalQuestions == 0) return 0;
+        return (double) questionsCorrect / (double) totalQuestions * 100;
     }
 
     public void addQuestion(boolean correctlyAnswered) {

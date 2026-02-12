@@ -16,6 +16,7 @@ public class Rechtschreibtrainer implements Controller {
 
     public Rechtschreibtrainer() {
         view = new Frame(this, new MainPanel(this));
+        statistic = new Statistic();
     }
 
 
