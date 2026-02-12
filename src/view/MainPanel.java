@@ -21,4 +21,9 @@ public class MainPanel extends JPanel {
 
         this.add(mB,  BorderLayout.NORTH);
     }
+
+    public void setCenterPanel(JPanel j){
+        this.add(j, BorderLayout.CENTER);
+        this.revalidate();
+    }
 }
