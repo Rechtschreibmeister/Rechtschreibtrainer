@@ -11,7 +11,7 @@ public class GameMode extends Game {
 
     public GameMode(Quiz quiz, Statistic statistic, Controller controller) {
         Collections.shuffle(quiz.getQuestions(), controller.getRandom());
-        super(quiz, statistic);
+        super(quiz, statistic, true);
     }
 
     @Override

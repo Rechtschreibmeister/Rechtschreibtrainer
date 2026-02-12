@@ -1,7 +1,6 @@
 package controller;
 
-import model.Question;
-import model.Statistic;
+import model.*;
 import view.*;
 
 import java.awt.event.ActionEvent;
@@ -11,6 +10,9 @@ public class Rechtschreibtrainer implements Controller {
 
     private Frame view;
     private Statistic statistic;
+
+    private Game game;
+
 
     public Rechtschreibtrainer() {
         view = new Frame(this, new MainPanel(this));
@@ -47,6 +49,8 @@ public class Rechtschreibtrainer implements Controller {
                 view.getMainPanel().setCenterPanel(new CreatePanel(this));
                 break;
             case enter:
+                //game.checkAnswer(view.getMainPanel());
+                askQuestion();
                 break;
             case hint:
                 break;
@@ -59,4 +63,13 @@ public class Rechtschreibtrainer implements Controller {
     public Random getRandom() {
         return new Random();
     }
+
+    private void startQuiz(Quiz quiz, boolean gamemode){
+        game = gamemode ? new GameMode(quiz, statistic, this) :  new QuizMode(quiz, statistic);
+    }
+
+    private void askQuestion(){
+        view.getMainPanel().setCenterPanel(new QuestionPanel(this, game.getGameMode(), game.nextQuestion()));
+    }
+
 }
