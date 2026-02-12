@@ -2,8 +2,9 @@ package controller;
 
 import model.Question;
 
-public class Controller {
-    public void askQuestion(Question question) {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-    }
+public interface Controller extends ActionListener {
+
 }
