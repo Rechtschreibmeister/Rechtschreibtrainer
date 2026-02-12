@@ -1,15 +1,16 @@
 package controller;
 
-import view.Commands;
-import view.Frame;
-import view.MainPanel;
+import model.Question;
+import model.Statistic;
+import view.*;
 
 import java.awt.event.ActionEvent;
 import java.util.Random;
 
 public class Rechtschreibtrainer implements Controller {
 
-    Frame view;
+    private Frame view;
+    private Statistic statistic;
 
     public Rechtschreibtrainer() {
         view = new Frame(this, new MainPanel(this));
@@ -32,13 +33,18 @@ public class Rechtschreibtrainer implements Controller {
         System.out.println(c);
         switch(c){
             case quiz:
-
+                boolean gamemode = true;
+                Question question = new Question("", null, "", null);
+                view.getMainPanel().setCenterPanel(new QuestionPanel(this, gamemode, question));
                 break;
             case game:
+
                 break;
             case stats:
+                view.getMainPanel().setCenterPanel(new StatisticsPanel(statistic));
                 break;
             case create:
+                view.getMainPanel().setCenterPanel(new CreatePanel(this));
                 break;
             case enter:
                 break;

@@ -40,4 +40,9 @@ public class MainPanel extends JPanel {
 
         this.add(p, BorderLayout.NORTH);
     }
+
+    public void setCenterPanel(JPanel j){
+        this.add(j, BorderLayout.CENTER);
+        this.revalidate();
+    }
 }
