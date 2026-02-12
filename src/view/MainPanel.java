@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainPanel extends JPanel {
+    private JPanel center;
+
     public MainPanel(Controller controller) {
         this.setLayout(new BorderLayout());
         this.Panel(controller);
@@ -23,7 +25,12 @@ public class MainPanel extends JPanel {
     }
 
     public void setCenterPanel(JPanel j){
-        this.add(j, BorderLayout.CENTER);
+        center = j;
+        this.add(center, BorderLayout.CENTER);
         this.revalidate();
+    }
+
+    public JPanel getCenterPanel(){
+        return center;
     }
 }

@@ -7,11 +7,12 @@ public abstract class Game {
     private Statistic statistic;
     private int score = 0;
     private int questionNumber = 0;
+    private boolean gameMode;
 
-
-    public Game(Quiz quiz, Statistic statistic) {
+    public Game(Quiz quiz, Statistic statistic, boolean gameMode) {
         this.quiz = quiz;
         this.statistic = statistic;
+        this.gameMode = gameMode;
     }
 
     /**
@@ -43,5 +44,9 @@ public abstract class Game {
 
     protected void addToScore(int amount) {
         score += amount;
+    }
+
+    public boolean getGameMode(){
+        return gameMode;
     }
 }
