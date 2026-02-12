@@ -50,8 +50,8 @@ public class Rechtschreibtrainer implements Controller {
                 view.getMainPanel().setCenterPanel(new CreatePanel(this, view));
                 break;
             case enter:
-                //game.checkAnswer(view.getMainPanel());
-                askQuestion();
+                QuestionPanel p = (QuestionPanel)(view.getMainPanel().getCenterPanel());
+                view.answered(game.checkAnswer(p.getInput()));
                 break;
             case hint:
                 break;
