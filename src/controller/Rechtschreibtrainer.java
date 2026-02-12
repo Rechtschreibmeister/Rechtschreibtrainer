@@ -46,7 +46,7 @@ public class Rechtschreibtrainer implements Controller {
                 view.getMainPanel().setCenterPanel(new StatisticsPanel(statistic));
                 break;
             case create:
-                view.getMainPanel().setCenterPanel(new CreatePanel(this));
+                view.getMainPanel().setCenterPanel(new CreatePanel(this, view));
                 break;
             case enter:
                 //game.checkAnswer(view.getMainPanel());
