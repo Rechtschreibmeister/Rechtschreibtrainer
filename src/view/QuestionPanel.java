@@ -9,13 +9,14 @@ import java.awt.*;
 public class QuestionPanel extends JPanel {
     JLabel cor,incor,round,Question,tip;
     JPanel image;
+    JTextField userInput;
 
     public QuestionPanel(Controller controller, boolean game, Question q) {
             this.setLayout(new BorderLayout());
             this.basicPanel(controller, game);
     }
 
-    public void basicPanel(Controller controller, boolean game){
+    public void basicPanel(Controller controller, boolean game) {
         JPanel p = new JPanel();
 
         p.setLayout(new BorderLayout());
@@ -49,10 +50,10 @@ public class QuestionPanel extends JPanel {
 
         JPanel p2 = new JPanel();
 
-        JTextField f = new JTextField();
-        f.addActionListener(controller);
-        f.setActionCommand(Commands.enter.name());
-        p2.add(f);
+        userInput = new JTextField();
+        userInput.addActionListener(controller);
+        userInput.setActionCommand(Commands.enter.name());
+        p2.add(userInput);
 
         if(game) {
             JButton hint = new JButton("Tipp");
@@ -74,5 +75,9 @@ public class QuestionPanel extends JPanel {
         this.cor.setText("Richtig:" + correct);
         this.incor.setText("Falsch:" + incorrect);
         this.round.setText("Runde:" + round);
+    }
+
+    public String getInput(){
+        return this.userInput.getText();
     }
 }

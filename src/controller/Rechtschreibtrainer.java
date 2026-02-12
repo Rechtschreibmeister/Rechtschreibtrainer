@@ -32,7 +32,6 @@ public class Rechtschreibtrainer implements Controller {
         System.out.println(c);
         switch(c){
             case quiz:
-
                 break;
             case game:
                 break;

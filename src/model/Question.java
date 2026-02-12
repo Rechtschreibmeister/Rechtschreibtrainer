@@ -10,6 +10,10 @@ public class Question {
     private String answer;
     private ArrayList<String> tips;
 
+    public Question(){
+
+    }
+
     public Question(String question, BufferedImage image, String answer,  ArrayList<String> tips) {
         this.question = question;
         this.image = image;
