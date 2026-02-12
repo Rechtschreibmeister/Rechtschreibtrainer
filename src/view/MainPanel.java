@@ -12,6 +12,7 @@ public class MainPanel extends JPanel {
         this.setLayout(new BorderLayout());
         this.Panel(controller);
     }
+
     public void Panel(Controller controller) {
         JMenuBar mB = new JMenuBar();
         JMenu m = new JMenu("Start");
@@ -24,13 +25,13 @@ public class MainPanel extends JPanel {
         this.add(mB,  BorderLayout.NORTH);
     }
 
-    public void setCenterPanel(JPanel j){
+    public void setCenterPanel(JPanel j) {
         center = j;
         this.add(center, BorderLayout.CENTER);
         this.revalidate();
     }
 
-    public JPanel getCenterPanel(){
+    public JPanel getCenterPanel() {
         return center;
     }
 }

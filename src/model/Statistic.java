@@ -22,13 +22,15 @@ public class Statistic {
         return totalQuestions - questionsCorrect;
     }
 
-    public double getCorrectPercentage(){
-        return (double) totalQuestions /(double) questionsCorrect * 100;
+    public double getCorrectPercentage() {
+        return (double) totalQuestions / (double) questionsCorrect * 100;
     }
 
-    public void addQuestion(boolean correctlyAnswered){
+    public void addQuestion(boolean correctlyAnswered) {
         totalQuestions++;
-        if(correctlyAnswered){ questionsCorrect++;}
+        if (correctlyAnswered) {
+            questionsCorrect++;
+        }
     }
 
 }

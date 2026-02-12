@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Rechtschreibtrainer implements Controller {
 
-    private Frame view;
+    private final Frame view;
     private Statistic statistic;
 
     private Game game;
@@ -19,7 +19,7 @@ public class Rechtschreibtrainer implements Controller {
     }
 
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         Rechtschreibtrainer r = new Rechtschreibtrainer();
     }
 
@@ -27,13 +27,13 @@ public class Rechtschreibtrainer implements Controller {
     public void actionPerformed(ActionEvent e) {
 
         Commands c = null;
-        for(Commands c1 : Commands.values()) {
-            if(e.getActionCommand().equals(c1.toString())) {
+        for (Commands c1 : Commands.values()) {
+            if (e.getActionCommand().equals(c1.toString())) {
                 c = c1;
             }
         }
         System.out.println(c);
-        switch(c){
+        switch (c) {
             case quiz:
                 boolean gamemode = true;
                 Question question = new Question("", null, "", null);
@@ -46,7 +46,7 @@ public class Rechtschreibtrainer implements Controller {
                 view.getMainPanel().setCenterPanel(new StatisticsPanel(statistic));
                 break;
             case create:
-                view.getMainPanel().setCenterPanel(new CreatePanel(this));
+                view.getMainPanel().setCenterPanel(new CreatePanel(this, view));
                 break;
             case enter:
                 //game.checkAnswer(view.getMainPanel());
@@ -64,11 +64,11 @@ public class Rechtschreibtrainer implements Controller {
         return new Random();
     }
 
-    private void startQuiz(Quiz quiz, boolean gamemode){
-        game = gamemode ? new GameMode(quiz, statistic, this) :  new QuizMode(quiz, statistic);
+    private void startQuiz(Quiz quiz, boolean gamemode) {
+        game = gamemode ? new GameMode(quiz, statistic, this) : new QuizMode(quiz, statistic);
     }
 
-    private void askQuestion(){
+    private void askQuestion() {
         view.getMainPanel().setCenterPanel(new QuestionPanel(this, game.getGameMode(), game.nextQuestion()));
     }
 

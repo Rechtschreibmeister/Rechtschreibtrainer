@@ -21,5 +21,4 @@ public class StatisticsPanel extends JPanel {
     }
 
 
-
 }
