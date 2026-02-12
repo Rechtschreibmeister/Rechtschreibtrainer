@@ -5,8 +5,9 @@ import view.Frame;
 import view.MainPanel;
 
 import java.awt.event.ActionEvent;
+import java.util.Random;
 
-public class Rechtschreibtrainer implements Controller{
+public class Rechtschreibtrainer implements Controller {
 
     Frame view;
 
@@ -23,8 +24,8 @@ public class Rechtschreibtrainer implements Controller{
     public void actionPerformed(ActionEvent e) {
 
         Commands c = null;
-        for(Commands c1 : Commands.values()){
-            if(e.getActionCommand().equals(c1.toString())){
+        for(Commands c1 : Commands.values()) {
+            if(e.getActionCommand().equals(c1.toString())) {
                 c = c1;
             }
         }
@@ -46,5 +47,10 @@ public class Rechtschreibtrainer implements Controller{
             case submit_question:
                 break;
         }
+    }
+
+    @Override
+    public Random getRandom() {
+        return new Random();
     }
 }
