@@ -11,12 +11,12 @@ public class Rechtschreibtrainer implements Controller {
 
     Frame view;
 
-    public Rechtschreibtrainer(){
+    public Rechtschreibtrainer() {
         view = new Frame(this, new MainPanel(this));
     }
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Rechtschreibtrainer r = new Rechtschreibtrainer();
     }
 
