@@ -7,15 +7,15 @@ import javax.swing.*;
 import java.awt.*;
 
 public class QuestionPanel extends JPanel {
-    JLabel cor,incor,round,Question,tip;
+    JLabel cor, incor, round, Question, tip;
     JPanel image;
 
     public QuestionPanel(Controller controller, boolean game, Question q) {
-            this.setLayout(new BorderLayout());
-            this.basicPanel(controller, game);
+        this.setLayout(new BorderLayout());
+        this.basicPanel(controller, game);
     }
 
-    public void basicPanel(Controller controller, boolean game){
+    public void basicPanel(Controller controller, boolean game) {
         JPanel p = new JPanel();
 
         p.setLayout(new BorderLayout());
@@ -23,24 +23,24 @@ public class QuestionPanel extends JPanel {
 
         JPanel p1 = new JPanel();
         p1.setLayout(new BorderLayout());
-        this.cor = new  JLabel("Richtig:");
+        this.cor = new JLabel("Richtig:");
         p1.add(cor, BorderLayout.NORTH);
 
-        this.incor = new  JLabel("Falsch:");
-        p1.add(incor,  BorderLayout.SOUTH);
-        p.add(p1,BorderLayout.NORTH);
+        this.incor = new JLabel("Falsch:");
+        p1.add(incor, BorderLayout.SOUTH);
+        p.add(p1, BorderLayout.NORTH);
 
         this.round = new JLabel("Runde:");
         p.add(round, BorderLayout.SOUTH);
 
-        this.add(p,BorderLayout.EAST);
+        this.add(p, BorderLayout.EAST);
 
         JPanel main = new JPanel();
-        main.setLayout(new BoxLayout(main,BoxLayout.Y_AXIS));
+        main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
         main.setBorder(BorderFactory.createLineBorder(Color.black));
 
         image = new JPanel();
-        image.setSize(400,400);
+        image.setSize(400, 400);
         image.setBackground(Color.black);
         main.add(image);
 
@@ -54,7 +54,7 @@ public class QuestionPanel extends JPanel {
         f.setActionCommand(Commands.enter.name());
         p2.add(f);
 
-        if(game) {
+        if (game) {
             JButton hint = new JButton("Tipp");
             hint.addActionListener(controller);
             hint.setActionCommand(Commands.hint.name());
@@ -65,7 +65,7 @@ public class QuestionPanel extends JPanel {
 
         tip = new JLabel("hallo");
         main.add(tip);
-        this.add(main,BorderLayout.CENTER);
+        this.add(main, BorderLayout.CENTER);
 
 
     }

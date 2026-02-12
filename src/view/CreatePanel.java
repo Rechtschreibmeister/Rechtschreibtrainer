@@ -11,10 +11,10 @@ import java.io.IOException;
 
 public class CreatePanel extends JPanel {
 
-    private JTextField answer;
-    private JTextField question;
-    private FileDialog fd;
-    private JButton submit;
+    private final JTextField answer;
+    private final JTextField question;
+    private final FileDialog fd;
+    private final JButton submit;
 
     public CreatePanel(Controller c, JFrame f) {
         BoxLayout layout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
@@ -23,7 +23,7 @@ public class CreatePanel extends JPanel {
         answer = new JTextField();
         question = new JTextField();
         fd = new FileDialog(f, "Wählen Sie ein Bild aus!", FileDialog.LOAD);
-        
+
         JLabel[] l = new JLabel[3];
         l[0] = new JLabel("Geben Sie hier ihre Frage ein: ");
         l[1] = new JLabel("Geben Sie hier optional ein Bild an: ");

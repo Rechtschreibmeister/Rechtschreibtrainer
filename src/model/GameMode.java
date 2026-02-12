@@ -1,6 +1,7 @@
 package model;
 
 import controller.Controller;
+
 import java.util.Collections;
 
 public class GameMode extends Game {

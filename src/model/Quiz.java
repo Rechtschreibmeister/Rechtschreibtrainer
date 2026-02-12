@@ -22,6 +22,7 @@ public class Quiz {
     public void addQuestion(Question question) {
         questions.add(question);
     }
+
     public void removeQuestion(int index) {
         questions.remove(index);
     }
