@@ -57,19 +57,4 @@ public class CreatePanel extends JPanel {
     public String getQuestion(){
         return question.getText();
     }
-
-    /**
-     * This Method is only for testing.
-     *
-     * @param args
-     */
-    public static void main(String[] args){
-        JFrame jf = new JFrame();
-        CreatePanel panel = new CreatePanel(null);
-        jf.getContentPane().add(panel);
-        jf.pack();
-        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jf.setVisible(true);
-    }
-
 }
