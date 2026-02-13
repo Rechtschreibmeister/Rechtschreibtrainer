@@ -7,8 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class QuestionPanel extends JPanel {
+    JPanel ip;
     JLabel cor,incor,round,Question,tip;
-    JPanel image;
     JTextField userInput;
 
     public QuestionPanel(Controller controller, boolean isGameMode, Question q) {
@@ -40,10 +40,8 @@ public class QuestionPanel extends JPanel {
         main.setLayout(new BoxLayout(main,BoxLayout.Y_AXIS));
         main.setBorder(BorderFactory.createLineBorder(Color.black));
 
-        image = new JPanel();
-        image.setSize(400,400);
-        image.setBackground(Color.black);
-        main.add(image);
+        ip = new JPanel(); // image Panel
+        main.add(ip);
 
         this.Question = new JLabel("Frage:");
         main.add(Question);
@@ -51,11 +49,12 @@ public class QuestionPanel extends JPanel {
         JPanel p2 = new JPanel();
 
         userInput = new JTextField();
+        userInput.setPreferredSize(new Dimension(400,24));
         userInput.addActionListener(controller);
         userInput.setActionCommand(Commands.enter.name());
         p2.add(userInput);
 
-        if(game) {
+        if(true) {
             JButton hint = new JButton("Tipp");
             hint.addActionListener(controller);
             hint.setActionCommand(Commands.hint.name());
@@ -67,8 +66,6 @@ public class QuestionPanel extends JPanel {
         tip = new JLabel("hallo");
         main.add(tip);
         this.add(main,BorderLayout.CENTER);
-
-
     }
 
     public void updateSidebar(int correct, int incorrect, int round) {
