@@ -16,22 +16,22 @@ public class SaveLoad {
     }
 
 
-    public Quiz load(String filepath) {
-        Quiz q;
+    public Object load(String filepath) {
+        Object obj;
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path + File.pathSeparator + filepath))) {
-            q = (Quiz) ois.readObject();
+            obj = ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return q;
+        return obj;
     }
 
-    public void save(String filepath, Quiz q) {
+    public void save(String filepath, Object obj) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path + File.pathSeparator + filepath))) {
-            oos.writeObject(q);
+            oos.writeObject(obj);
         } catch (IOException e) {
-            System.out.println("Unable to save quiz: " + e.getMessage());
-            System.out.println(q);
+            System.out.println("Unable to save: " + e.getMessage());
+            System.out.println(obj);
             throw new RuntimeException(e);
         }
     }
