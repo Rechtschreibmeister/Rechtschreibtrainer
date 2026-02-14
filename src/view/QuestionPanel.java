@@ -5,18 +5,17 @@ import model.Question;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class QuestionPanel extends JPanel {
-    JPanel ip;
-    JLabel cor,incor,round,Question,tip;
-    JTextField userInput;
+    private JPanel ip;
+    private JLabel cor,incor,round,Question,tip;
+    private JTextField inputTextfield;
+    private boolean isGame;
 
     public QuestionPanel(Controller controller, boolean isGameMode, Question q) {
-            this.setLayout(new BorderLayout());
-            this.basicPanel(controller, isGameMode);
-    }
-
-    public void basicPanel(Controller controller, boolean game) {
+        this.isGame = isGameMode;
+        this.setLayout(new BorderLayout());
         JPanel p = new JPanel();
 
         p.setLayout(new BorderLayout());
@@ -37,44 +36,55 @@ public class QuestionPanel extends JPanel {
         this.add(p,BorderLayout.EAST);
 
         JPanel main = new JPanel();
-        main.setLayout(new BoxLayout(main,BoxLayout.Y_AXIS));
-        main.setBorder(BorderFactory.createLineBorder(Color.black));
+        main.setLayout(new BoxLayout(main,BoxLayout.PAGE_AXIS));
+        main.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         ip = new JPanel(); // image Panel
-        main.add(ip);
+        ip.setPreferredSize(new Dimension(600,400));
 
-        this.Question = new JLabel("Frage:");
-        main.add(Question);
+        this.Question = new JLabel(" ");
+        this.Question.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.Question.setPreferredSize(new Dimension(200,100));
 
-        JPanel p2 = new JPanel();
+        JPanel userInput = new JPanel();
+        userInput.setLayout(new BoxLayout(userInput,BoxLayout.LINE_AXIS));
+        userInput.setAlignmentX(Component.CENTER_ALIGNMENT);
+        inputTextfield = new JTextField();
+        inputTextfield.setMaximumSize(new Dimension(400,24));
+        inputTextfield.addActionListener(controller);
+        inputTextfield.setActionCommand(Commands.enter.name());
+        userInput.add(inputTextfield);
 
-        userInput = new JTextField();
-        userInput.setPreferredSize(new Dimension(400,24));
-        userInput.addActionListener(controller);
-        userInput.setActionCommand(Commands.enter.name());
-        p2.add(userInput);
+        this.tip = new JLabel(" ");
+        this.tip.setPreferredSize(new Dimension(600,100));
 
-        if(true) {
-            JButton hint = new JButton("Tipp");
-            hint.addActionListener(controller);
-            hint.setActionCommand(Commands.hint.name());
-            p2.add(hint);
+        JButton hint = new JButton("Tipp");
+        hint.addActionListener(controller);
+        hint.setActionCommand(Commands.hint.name());
+
+        if(this.isGame) {
+            userInput.add(hint);
         }
 
-        main.add(p2);
-
-        tip = new JLabel("hallo");
+        main.add(ip);
+        main.add(Question);
+        main.add(userInput);
         main.add(tip);
+
+
         this.add(main,BorderLayout.CENTER);
     }
 
-    public void updateSidebar(int correct, int incorrect, int round) {
+    public void updatePage(int correct, int incorrect, int round, Question q) {
+        this.ip.removeAll();
+        this.ip.add(q.getImage());
+        this.Question.setText(q.getQuestion());
         this.cor.setText("Richtig:" + correct);
         this.incor.setText("Falsch:" + incorrect);
         this.round.setText("Runde:" + round);
     }
 
     public String getInput(){
-        return this.userInput.getText();
+        return this.inputTextfield.getText();
     }
 }

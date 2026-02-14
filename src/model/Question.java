@@ -24,4 +24,8 @@ public class Question {
     public String getAnswer() {
         return answer;
     }
+
+    public String getQuestion() { return question; }
+
+    public BufferedImage getImage() { return image; }
 }
