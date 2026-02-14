@@ -7,26 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class QuestionPanel extends JPanel {
-    private JPanel img;
+    private Image img;
     private JLabel cor, incor, round, Question, tip;
     private JTextField inputTextfield;
     private boolean isGame;
-
-    private class ImagePanel extends JPanel {
-        private ImageIcon image;
-
-        public ImagePanel(ImageIcon image) {
-            this.image = image;
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            if (image != null) {
-                image.paintIcon(this, g, 0, 0);
-            }
-        }
-    }
 
     public QuestionPanel(Controller controller, boolean isGameMode, int rounds, Question q) {
         this.isGame = isGameMode;
@@ -93,13 +77,7 @@ public class QuestionPanel extends JPanel {
     }
 
     public void updatePage(int correct, int incorrect, int round, int maxround, Question q) {
-        this.img.removeAll();
-
-        ImageIcon img = q.getImage();
-        ImagePanel imagePanel = new ImagePanel(img);
-        imagePanel.setPreferredSize(new Dimension(600, 400));
-
-        this.img.add(imagePanel);
+        this.img.updateImage(q.getImage());
         this.Question.setText(q.getQuestion());
         this.cor.setText("" + correct);
         this.incor.setText("" + incorrect);
