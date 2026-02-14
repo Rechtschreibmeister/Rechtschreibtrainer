@@ -20,18 +20,20 @@ public class Image extends JPanel {
     }
 
     public void updateImage(ImageIcon image) {
-        int newWidth;
-        int newHeight;
-        double widthToHeight = (double) image.getIconWidth() / image.getIconHeight();
-        if (getHeight() * widthToHeight > getWidth()) {
-            newWidth = getWidth();
-            newHeight = (int) (newWidth / widthToHeight);
-        } else {
-            newHeight = getHeight();
-            newWidth = (int) (newHeight * widthToHeight);
+        if  (image != null) {
+            int newWidth;
+            int newHeight;
+            double widthToHeight = (double) image.getIconWidth() / image.getIconHeight();
+            if (getHeight() * widthToHeight > getWidth()) {
+                newWidth = getWidth();
+                newHeight = (int) (newWidth / widthToHeight);
+            } else {
+                newHeight = getHeight();
+                newWidth = (int) (newHeight * widthToHeight);
+            }
+            image = new ImageIcon(image.getImage().getScaledInstance(newWidth, newHeight, 1));
+            this.image = image;
+            repaint();
         }
-        image = new ImageIcon(image.getImage().getScaledInstance(newWidth, newHeight, 1));
-        this.image = image;
-        repaint();
     }
 }
