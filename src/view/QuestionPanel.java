@@ -14,9 +14,9 @@ public class QuestionPanel extends JPanel {
     private boolean isGame;
 
     private class ImagePanel extends JPanel {
-        private BufferedImage image;
+        private ImageIcon image;
 
-        public ImagePanel(BufferedImage image) {
+        public ImagePanel(ImageIcon image) {
             this.image = image;
         }
 
@@ -24,7 +24,7 @@ public class QuestionPanel extends JPanel {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             if (image != null) {
-                g.drawImage(image, 0, 0, this);
+                image.paintIcon(this, g, 0, 0);
             }
         }
     }
@@ -95,7 +95,7 @@ public class QuestionPanel extends JPanel {
     public void updatePage(int correct, int incorrect, int round, int maxround, Question q) {
         this.ip.removeAll();
 
-        BufferedImage img = q.getImage();
+        ImageIcon img = q.getImage();
         ImagePanel imagePanel = new ImagePanel(img);
         imagePanel.setPreferredSize(new Dimension(600, 400));
 

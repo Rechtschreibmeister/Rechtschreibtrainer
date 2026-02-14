@@ -1,12 +1,13 @@
 package model;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Question {
     private String question;
-    private BufferedImage image;
+    private ImageIcon image;
     private String answer;
     private ArrayList<String> tips;
 
@@ -14,7 +15,7 @@ public class Question {
 
     }
 
-    public Question(String question, BufferedImage image, String answer,  ArrayList<String> tips) {
+    public Question(String question, ImageIcon image, String answer,  ArrayList<String> tips) {
         this.question = question;
         this.image = image;
         this.answer = answer;
@@ -27,5 +28,5 @@ public class Question {
 
     public String getQuestion() { return question; }
 
-    public BufferedImage getImage() { return image; }
+    public ImageIcon getImage() { return image; }
 }
