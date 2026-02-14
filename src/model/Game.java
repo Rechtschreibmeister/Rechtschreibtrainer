@@ -6,7 +6,7 @@ public abstract class Game {
     private final Quiz quiz;
     private final Statistic statistic;
     private int score = 0;
-    private int questionNumber = 0;
+    private int questionNumber = -1;
     private final boolean gameMode;
 
     public Game(Quiz quiz, Statistic statistic, boolean gameMode) {
@@ -21,8 +21,9 @@ public abstract class Game {
      * @return the next question
      */
     public Question nextQuestion() {
-        Question nextQuestion = quiz.getQuestion(questionNumber);
         questionNumber++;
+        if(questionNumber >= quiz.getQuestions().size()) return null;
+        Question nextQuestion = quiz.getQuestion(questionNumber);
         return nextQuestion;
     }
 

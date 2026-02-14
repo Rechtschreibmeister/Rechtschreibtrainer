@@ -27,14 +27,21 @@ public class Frame extends JFrame {
     }
 
     public void answered(boolean correctly){
-        JDialog dialog = new JDialog();
+        //JOptionPane.showMessageDialog(mainpanel, correctly ? "Correct Answer" : "Wrong Answer");
+        showSnackbar(correctly ? "Correct Answer" : "Wrong Answer", correctly ? Color.GREEN : Color.RED);
+        /*JDialog dialog = new JDialog();
         dialog.setTitle(correctly ? "Richtig" : "Falsch");
         dialog.setLocationRelativeTo(null);
         dialog.setSize(1280, 720);
         dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         dialog.setResizable(false);
-        dialog.setVisible(true);
+        dialog.setVisible(true);*/
     }
+
+    public void finishedQuiz(){
+
+    }
+
 
     public void showSnackbar(String message, Color color) {
         JDialog snackbarDialog = new JDialog(this, "", Dialog.ModalityType.MODELESS);
