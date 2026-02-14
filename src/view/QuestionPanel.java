@@ -5,10 +5,9 @@ import model.Question;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class QuestionPanel extends JPanel {
-    private JPanel ip;
+    private JPanel img;
     private JLabel cor, incor, round, Question, tip;
     private JTextField inputTextfield;
     private boolean isGame;
@@ -57,8 +56,8 @@ public class QuestionPanel extends JPanel {
         main.setLayout(new BoxLayout(main, BoxLayout.PAGE_AXIS));
         main.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        ip = new JPanel(); // image Panel
-        ip.setPreferredSize(new Dimension(600, 400));
+        img = new Image(q.getImage());
+
 
         this.Question = new JLabel(" ");
         this.Question.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -84,7 +83,7 @@ public class QuestionPanel extends JPanel {
             userInput.add(hint);
         }
 
-        main.add(ip);
+        main.add(img);
         main.add(Question);
         main.add(userInput);
         main.add(tip);
@@ -94,20 +93,20 @@ public class QuestionPanel extends JPanel {
     }
 
     public void updatePage(int correct, int incorrect, int round, int maxround, Question q) {
-        this.ip.removeAll();
+        this.img.removeAll();
 
         ImageIcon img = q.getImage();
         ImagePanel imagePanel = new ImagePanel(img);
         imagePanel.setPreferredSize(new Dimension(600, 400));
 
-        this.ip.add(imagePanel);
+        this.img.add(imagePanel);
         this.Question.setText(q.getQuestion());
         this.cor.setText("" + correct);
         this.incor.setText("" + incorrect);
         this.round.setText("Frage: " + round + "/" + maxround);
 
-        this.ip.revalidate();
-        this.ip.repaint();
+        this.img.revalidate();
+        this.img.repaint();
     }
 
     public void setTip(String tip) {
