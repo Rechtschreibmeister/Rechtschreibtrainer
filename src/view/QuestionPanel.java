@@ -52,7 +52,7 @@ public class QuestionPanel extends JPanel {
         this.inputTextfield = new JTextField();
         this.inputTextfield.setMaximumSize(new Dimension(400, 24));
         this.inputTextfield.addActionListener(controller);
-        this.inputTextfield.setActionCommand(Commands.enter.name());
+        this.inputTextfield.setActionCommand(Commands.enteredAnswer.name());
         userInput.add(inputTextfield);
 
         this.hint = new JLabel();
