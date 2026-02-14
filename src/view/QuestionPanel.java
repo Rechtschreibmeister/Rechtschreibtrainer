@@ -40,9 +40,11 @@ public class QuestionPanel extends JPanel {
         JPanel p1 = new JPanel();
         p1.setLayout(new BorderLayout());
         this.cor = new JLabel("Richtig:");
+        cor.setForeground(Color.blue);
         p1.add(cor, BorderLayout.NORTH);
 
         this.incor = new JLabel("Falsch:");
+        incor.setForeground(Color.red);
         p1.add(incor, BorderLayout.SOUTH);
         p.add(p1, BorderLayout.NORTH);
 
@@ -57,7 +59,6 @@ public class QuestionPanel extends JPanel {
 
         ip = new JPanel(); // image Panel
         ip.setPreferredSize(new Dimension(600, 400));
-        ip.setBackground(Color.blue);
 
         this.Question = new JLabel(" ");
         this.Question.setAlignmentX(Component.CENTER_ALIGNMENT);
