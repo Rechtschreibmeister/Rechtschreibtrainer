@@ -55,7 +55,7 @@ public class QuestionPanel extends JPanel {
         inputTextfield.setActionCommand(Commands.enter.name());
         userInput.add(inputTextfield);
 
-        this.tip = new JLabel("peter");
+        this.tip = new JLabel();
         this.tip.setPreferredSize(new Dimension(600, 100));
         this.tip.setAlignmentX(Component.CENTER_ALIGNMENT);
 
