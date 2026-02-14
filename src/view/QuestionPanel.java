@@ -42,7 +42,6 @@ public class QuestionPanel extends JPanel {
 
         img = new Image(q.getImage());
 
-
         this.Question = new JLabel(" ");
         this.Question.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.Question.setPreferredSize(new Dimension(200, 100));
@@ -82,9 +81,6 @@ public class QuestionPanel extends JPanel {
         this.cor.setText("" + correct);
         this.incor.setText("" + incorrect);
         this.round.setText("Frage: " + round + "/" + maxround);
-
-        this.img.revalidate();
-        this.img.repaint();
     }
 
     public void setTip(String tip) {
