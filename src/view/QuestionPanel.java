@@ -8,11 +8,11 @@ import java.awt.*;
 
 public class QuestionPanel extends JPanel {
     private Image img;
-    private JLabel cor, incor, round, Question, tip;
+    private JLabel cor, incor, round, question, hint;
     private JTextField inputTextfield;
     private boolean isGame;
 
-    public QuestionPanel(Controller controller, boolean isGameMode, int rounds, Question q) {
+    public QuestionPanel(Controller controller, boolean isGameMode, int rounds, Question question) {
         this.isGame = isGameMode;
         this.setLayout(new BorderLayout());
         JPanel p = new JPanel();
@@ -23,16 +23,16 @@ public class QuestionPanel extends JPanel {
         JPanel p1 = new JPanel();
         p1.setLayout(new BorderLayout());
         this.cor = new JLabel("Richtig:");
-        cor.setForeground(Color.blue);
-        p1.add(cor, BorderLayout.NORTH);
+        this.cor.setForeground(Color.blue);
+        p1.add(this.cor, BorderLayout.NORTH);
 
         this.incor = new JLabel("Falsch:");
-        incor.setForeground(Color.red);
+        this.incor.setForeground(Color.red);
         p1.add(incor, BorderLayout.SOUTH);
         p.add(p1, BorderLayout.NORTH);
 
         this.round = new JLabel("Runde:");
-        p.add(round, BorderLayout.SOUTH);
+        p.add(this.round, BorderLayout.SOUTH);
 
         this.add(p, BorderLayout.EAST);
 
@@ -40,52 +40,54 @@ public class QuestionPanel extends JPanel {
         main.setLayout(new BoxLayout(main, BoxLayout.PAGE_AXIS));
         main.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        img = new Image(q.getImage());
+        this.img = new Image(question.getImage());
 
-        this.Question = new JLabel(" ");
-        this.Question.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.Question.setPreferredSize(new Dimension(200, 100));
+        this.question = new JLabel("Peter");
+        this.question.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.question.setPreferredSize(new Dimension(200, 100));
 
         JPanel userInput = new JPanel();
         userInput.setLayout(new BoxLayout(userInput, BoxLayout.LINE_AXIS));
         userInput.setAlignmentX(Component.CENTER_ALIGNMENT);
-        inputTextfield = new JTextField();
-        inputTextfield.setMaximumSize(new Dimension(400, 24));
-        inputTextfield.addActionListener(controller);
-        inputTextfield.setActionCommand(Commands.enter.name());
+        this.inputTextfield = new JTextField();
+        this.inputTextfield.setMaximumSize(new Dimension(400, 24));
+        this.inputTextfield.addActionListener(controller);
+        this.inputTextfield.setActionCommand(Commands.enter.name());
         userInput.add(inputTextfield);
 
-        this.tip = new JLabel();
-        this.tip.setPreferredSize(new Dimension(600, 100));
-        this.tip.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.hint = new JLabel();
+        this.hint.setPreferredSize(new Dimension(600, 100));
+        this.hint.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JButton hint = new JButton("Tipp");
-        hint.addActionListener(controller);
-        hint.setActionCommand(Commands.hint.name());
+        JButton newHint = new JButton("Tipp");
+        newHint.addActionListener(controller);
+        newHint.setActionCommand(Commands.hint.name());
+        newHint.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         if (this.isGame) {
-            userInput.add(hint);
+            userInput.add(newHint);
         }
 
-        main.add(img);
-        main.add(Question);
+        main.add(this.img);
+        main.add(this.question);
         main.add(userInput);
-        main.add(tip);
+        main.add(newHint);
+        main.add(this.hint);
 
         this.add(main, BorderLayout.CENTER);
-        updatePage(0, 0, 1, rounds, q);
+        updatePage(0, 0, 1, rounds, question);
     }
 
-    public void updatePage(int correct, int incorrect, int round, int maxround, Question q) {
-        this.img.updateImage(q.getImage());
-        this.Question.setText(q.getQuestion());
+    public void updatePage(int correct, int incorrect, int round, int maxround, Question question) {
+        this.img.updateImage(question.getImage());
+        this.question.setText(question.getQuestion());
         this.cor.setText("" + correct);
         this.incor.setText("" + incorrect);
         this.round.setText("Frage: " + round + "/" + maxround);
     }
 
-    public void setTip(String tip) {
-        this.tip.setText(tip);
+    public void setHint(String hint) {
+        this.hint.setText(hint);
     }
 
     public String getInput(){
