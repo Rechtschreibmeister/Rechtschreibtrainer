@@ -70,7 +70,7 @@ public class Rechtschreibtrainer implements Controller {
     }
 
     private void askQuestion() {
-        view.getMainPanel().setCenterPanel(new QuestionPanel(this, game.getGameMode(), game.nextQuestion()));
+        view.getMainPanel().setCenterPanel(new QuestionPanel(this, game.getGameMode(), game.getRounds(), game.nextQuestion()));
     }
 
 }
