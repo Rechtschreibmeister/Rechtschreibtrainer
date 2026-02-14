@@ -55,4 +55,8 @@ public class Quiz {
     public ArrayList<Question> getQuestions() {
         return questions;
     }
+
+    public int getRounds() {
+        return questions.size();
+    }
 }

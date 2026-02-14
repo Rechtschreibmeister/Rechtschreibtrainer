@@ -51,4 +51,8 @@ public abstract class Game {
     public boolean getGameMode() {
         return gameMode;
     }
+
+    public int getRounds() {
+        return quiz.getRounds();
+    }
 }
