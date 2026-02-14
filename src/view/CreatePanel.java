@@ -78,6 +78,11 @@ public class CreatePanel extends JPanel {
                 fileName = fd.getFile();
                 filePath = fd.getDirectory();
                 fileNameDisplay.setText(fileName);
+                if (fileName == null) {
+                    return;
+                }
+                file = new File(filePath + separator + fileName);
+                lastSelectedDirectory = file.getParentFile().toPath().toString();
             }
         });
 
@@ -85,7 +90,7 @@ public class CreatePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    Desktop.getDesktop().open(new File(filePath + separator + fileName));
+                    Desktop.getDesktop().open(file);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -102,10 +107,6 @@ public class CreatePanel extends JPanel {
     }
 
     public ImageIcon getImage() {
-        if (fileName != null) {
-            file = new File(fd.getDirectory() + separator + fileName);
-            lastSelectedDirectory = file.getParentFile().toPath().toString();
-        }
-        return new ImageIcon(fileName);
+        return new ImageIcon(filePath + separator + fileName);
     }
 }
