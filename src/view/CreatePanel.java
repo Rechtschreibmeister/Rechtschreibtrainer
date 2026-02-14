@@ -15,8 +15,8 @@ import java.io.IOException;
 import static java.io.File.separator;
 
 public class CreatePanel extends JPanel {
-    private final JTextField answer;
     private final JTextField question;
+    private final JTextField answer;
 
     private final FileDialog fd;
     private String lastSelectedDirectory = System.getProperty("user.home");
@@ -24,43 +24,47 @@ public class CreatePanel extends JPanel {
     String fileName = null;
     String filePath = null;
 
-    public CreatePanel(Controller c, JFrame f) {
-        BoxLayout layout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
-        this.setLayout(layout);
+    public CreatePanel(Controller controller, JFrame frame) {
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-        JPanel imageUpload = new JPanel();
-        imageUpload.setLayout(new BoxLayout(imageUpload, BoxLayout.LINE_AXIS));
         JButton fileChooser = new JButton("Hochladen");
-        JLabel fileNameDisplay = new JLabel();
-        JButton imageOpen = new JButton("Preview Image");
-        imageUpload.add(fileChooser);
-        imageUpload.add(imageOpen);
-        imageUpload.add(fileNameDisplay);
+        JLabel fileNameDisplay = new JLabel(" ");
 
-
-        answer = new JTextField();
         question = new JTextField();
+        answer = new JTextField();
         JButton submit = new JButton("Frage erstellen");
 
-        answer.addActionListener(c);
-        question.addActionListener(c);
-        submit.addActionListener(c);
+        question.addActionListener(controller);
+        answer.addActionListener(controller);
+        submit.addActionListener(controller);
 
         JLabel[] l = new JLabel[3];
         l[0] = new JLabel("Geben Sie hier ihre Frage ein: ");
         l[1] = new JLabel("Geben Sie hier optional ein Bild an: ");
         l[2] = new JLabel("Geben Sie hier die richtige Antwort ein: ");
 
+        for (JLabel lb : l) {
+            lb.setAlignmentX(Component.CENTER_ALIGNMENT);
+        }
+        fileChooser.setAlignmentX(Component.CENTER_ALIGNMENT);
+        submit.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        question.setMaximumSize(new Dimension(600, 25));
+        answer.setMaximumSize(new Dimension(600, 25));
+
+        Image image = new Image();
+
         this.add(l[0]);
         this.add(question);
         this.add(l[1]);
-        this.add(imageUpload);
+        this.add(fileChooser);
+        this.add(image);
         this.add(l[2]);
         this.add(answer);
         this.add(submit);
 
 
-        fd = new FileDialog(f, "Laden Sie ein Bild hoch!", FileDialog.LOAD);
+        fd = new FileDialog(frame, "Laden Sie ein Bild hoch!", FileDialog.LOAD);
         fd.setDirectory(lastSelectedDirectory);
 
         fd.setFilenameFilter(new FilenameFilter() {
@@ -83,17 +87,7 @@ public class CreatePanel extends JPanel {
                 }
                 file = new File(filePath + separator + fileName);
                 lastSelectedDirectory = file.getParentFile().toPath().toString();
-            }
-        });
-
-        imageOpen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                try {
-                    Desktop.getDesktop().open(file);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                image.updateImage(getImage());
             }
         });
     }
