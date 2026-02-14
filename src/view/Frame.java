@@ -4,6 +4,8 @@ import controller.Controller;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Frame extends JFrame {
 
@@ -32,5 +34,32 @@ public class Frame extends JFrame {
         dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         dialog.setResizable(false);
         dialog.setVisible(true);
+    }
+
+    public void showSnackbar(String message, Color color) {
+        JDialog snackbarDialog = new JDialog(this, "", Dialog.ModalityType.MODELESS);
+        snackbarDialog.setUndecorated(true);
+        snackbarDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        snackbarDialog.setLayout(new BorderLayout());
+
+        JLabel messageLabel = new JLabel(message, SwingConstants.CENTER);
+        messageLabel.setForeground(color);
+        messageLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        snackbarDialog.add(messageLabel, BorderLayout.CENTER);
+
+        snackbarDialog.setSize(250, 50);
+        snackbarDialog.setLocationRelativeTo(this);
+        snackbarDialog.setLocation(this.getX() + (this.getWidth()/2) - (snackbarDialog.getWidth()/2),
+                this.getY() + this.getHeight() - 100);
+        snackbarDialog.setVisible(true);
+
+        Timer timer = new Timer(3000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                snackbarDialog.dispose();
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
     }
 }

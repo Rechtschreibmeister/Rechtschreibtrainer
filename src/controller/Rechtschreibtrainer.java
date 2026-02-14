@@ -2,7 +2,9 @@ package controller;
 
 import model.*;
 import view.*;
+import view.Frame;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Random;
 
@@ -41,7 +43,7 @@ public class Rechtschreibtrainer implements Controller {
                 view.getMainPanel().setCenterPanel(new QuestionPanel(this, gamemode, game.getRounds(),  question));
                 break;
             case game:
-
+                view.showSnackbar("Game Started", Color.green);
                 break;
             case stats:
                 view.getMainPanel().setCenterPanel(new StatisticsPanel(statistic));
