@@ -9,11 +9,27 @@ import java.awt.image.BufferedImage;
 
 public class QuestionPanel extends JPanel {
     private JPanel ip;
-    private JLabel cor,incor,round,Question,tip;
+    private JLabel cor, incor, round, Question, tip;
     private JTextField inputTextfield;
     private boolean isGame;
 
-    public QuestionPanel(Controller controller, boolean isGameMode, Question q) {
+    private class ImagePanel extends JPanel {
+        private BufferedImage image;
+
+        public ImagePanel(BufferedImage image) {
+            this.image = image;
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            if (image != null) {
+                g.drawImage(image, 0, 0, this);
+            }
+        }
+    }
+
+    public QuestionPanel(Controller controller, boolean isGameMode, int rounds, Question q) {
         this.isGame = isGameMode;
         this.setLayout(new BorderLayout());
         JPanel p = new JPanel();
@@ -23,46 +39,47 @@ public class QuestionPanel extends JPanel {
 
         JPanel p1 = new JPanel();
         p1.setLayout(new BorderLayout());
-        this.cor = new  JLabel("Richtig:");
+        this.cor = new JLabel("Richtig:");
         p1.add(cor, BorderLayout.NORTH);
 
-        this.incor = new  JLabel("Falsch:");
-        p1.add(incor,  BorderLayout.SOUTH);
-        p.add(p1,BorderLayout.NORTH);
+        this.incor = new JLabel("Falsch:");
+        p1.add(incor, BorderLayout.SOUTH);
+        p.add(p1, BorderLayout.NORTH);
 
         this.round = new JLabel("Runde:");
         p.add(round, BorderLayout.SOUTH);
 
-        this.add(p,BorderLayout.EAST);
+        this.add(p, BorderLayout.EAST);
 
         JPanel main = new JPanel();
-        main.setLayout(new BoxLayout(main,BoxLayout.PAGE_AXIS));
+        main.setLayout(new BoxLayout(main, BoxLayout.PAGE_AXIS));
         main.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         ip = new JPanel(); // image Panel
-        ip.setPreferredSize(new Dimension(600,400));
+        ip.setPreferredSize(new Dimension(600, 400));
+        ip.setBackground(Color.blue);
 
         this.Question = new JLabel(" ");
         this.Question.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.Question.setPreferredSize(new Dimension(200,100));
+        this.Question.setPreferredSize(new Dimension(200, 100));
 
         JPanel userInput = new JPanel();
-        userInput.setLayout(new BoxLayout(userInput,BoxLayout.LINE_AXIS));
+        userInput.setLayout(new BoxLayout(userInput, BoxLayout.LINE_AXIS));
         userInput.setAlignmentX(Component.CENTER_ALIGNMENT);
         inputTextfield = new JTextField();
-        inputTextfield.setMaximumSize(new Dimension(400,24));
+        inputTextfield.setMaximumSize(new Dimension(400, 24));
         inputTextfield.addActionListener(controller);
         inputTextfield.setActionCommand(Commands.enter.name());
         userInput.add(inputTextfield);
 
         this.tip = new JLabel(" ");
-        this.tip.setPreferredSize(new Dimension(600,100));
+        this.tip.setPreferredSize(new Dimension(600, 100));
 
         JButton hint = new JButton("Tipp");
         hint.addActionListener(controller);
         hint.setActionCommand(Commands.hint.name());
 
-        if(this.isGame) {
+        if (this.isGame) {
             userInput.add(hint);
         }
 
@@ -71,17 +88,29 @@ public class QuestionPanel extends JPanel {
         main.add(userInput);
         main.add(tip);
 
-
-        this.add(main,BorderLayout.CENTER);
+        this.add(main, BorderLayout.CENTER);
+        updatePage(0, 0, 1, rounds, q);
     }
 
-    public void updatePage(int correct, int incorrect, int round, Question q) {
+    public void updatePage(int correct, int incorrect, int round, int maxround, Question q) {
         this.ip.removeAll();
-        this.ip.add(q.getImage());
+
+        BufferedImage img = q.getImage();
+        ImagePanel imagePanel = new ImagePanel(img);
+        imagePanel.setPreferredSize(new Dimension(600, 400));
+
+        this.ip.add(imagePanel);
         this.Question.setText(q.getQuestion());
-        this.cor.setText("Richtig:" + correct);
-        this.incor.setText("Falsch:" + incorrect);
-        this.round.setText("Runde:" + round);
+        this.cor.setText("" + correct);
+        this.incor.setText("" + incorrect);
+        this.round.setText("Frage: " + round + "/" + maxround);
+
+        this.ip.revalidate();
+        this.ip.repaint();
+    }
+
+    public void setTip(String tip) {
+        this.tip.setText(tip);
     }
 
     public String getInput(){

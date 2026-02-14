@@ -38,7 +38,7 @@ public class Rechtschreibtrainer implements Controller {
             case quiz:
                 boolean gamemode = false;
                 Question question = new Question("", null, "", null);
-                view.getMainPanel().setCenterPanel(new QuestionPanel(this, gamemode, question));
+                view.getMainPanel().setCenterPanel(new QuestionPanel(this, gamemode, game.getRounds(),  question));
                 break;
             case game:
 
