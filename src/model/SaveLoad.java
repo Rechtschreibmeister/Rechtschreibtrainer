@@ -8,7 +8,7 @@ import java.io.*;
  * @author lmueller
  * @version 2026-2-10
  */
-public class SaveLoad {
+public class SaveLoad implements Serializable{
     private final String path;
 
     public SaveLoad(String path) {
@@ -16,9 +16,9 @@ public class SaveLoad {
     }
 
 
-    public Object load(String filepath) {
+    public Object load(String name) {
         Object obj;
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path + File.pathSeparator + filepath))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path + File.pathSeparator + name))) {
             obj = ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -26,9 +26,13 @@ public class SaveLoad {
         return obj;
     }
 
-    public void save(String filepath, Object obj) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path + File.pathSeparator + filepath))) {
-            oos.writeObject(obj);
+    public void save(String name, Object obj) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path + File.pathSeparator + name))) {
+
+            //Wegen NotSerializableException
+            if(obj instanceof Quiz) oos.writeObject((Quiz) obj);
+            else oos.writeObject(obj);
+
         } catch (IOException e) {
             System.out.println("Unable to save: " + e.getMessage());
             System.out.println(obj);

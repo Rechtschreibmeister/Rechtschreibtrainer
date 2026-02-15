@@ -2,6 +2,7 @@ package view;
 
 import controller.Controller;
 import model.Game;
+import model.Question;
 
 import javax.swing.*;
 import java.awt.*;
@@ -73,13 +74,37 @@ public class Frame extends JFrame {
         timer.start();
     }
 
-    public void updateFont(){
+    /*public void updateFont(){
         this.setFontRecursively(frame, new Font("Arial", Font.BOLD, 18));
+    }*/
+
+    public void updateFontForAllComponents(Container c, Font f){
+        Component[] subC = c.getComponents();
+        for(Component c1 : subC){
+            c1.setFont(f);
+            if(c1 instanceof Container) updateFontForAllComponents((Container) c1, f);
+        }
     }
 
-    public void updateFontForAllComponents(){
-        this.getComponents();
+    /**
+     * With this function the User is asked to give the newly generated Quiz a name and a description
+     *
+     * @return returns a String array, where index 0 is the name and index 1 the description of the Quiz
+     */
+    public String[] askForNewQuizName(){
+        String s = JOptionPane.showInputDialog("Geben Sie einen Namen und eine Beschreibung, getrennt von einem ',', für Ihr Quiz  ein:");
+        return new String[]{s.split(",")[0], s.substring(s.split(",")[0].length())};
     }
 
 
+    /**
+     * Creates and returns a Question based of the User Input in the QuestionPanel.
+     * @return
+     */
+    public Question getCreatedQuestion() {
+        JPanel j = mainpanel.getCenterPanel();
+        if(!(j instanceof CreatePanel)) throw new RuntimeException("MainPanel is not a CreatePanel!");
+        CreatePanel c = (CreatePanel) j;
+        return c.generateQuestion();
+    }
 }

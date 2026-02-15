@@ -1,6 +1,8 @@
 package model;
 
-public abstract class Game {
+import java.io.Serializable;
+
+public abstract class Game implements Serializable {
     protected static final int SCORE_PER_QUESTION = 10;
 
     private final Quiz quiz;

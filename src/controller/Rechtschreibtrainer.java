@@ -6,6 +6,7 @@ import view.Frame;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -17,7 +18,9 @@ public class Rechtschreibtrainer implements Controller {
     private Quiz quiz;
 
     private Game game;
+    private Font font = new Font(Font.SERIF, Font.BOLD, 30);
 
+    private SaveLoad sl;
 
     public Rechtschreibtrainer() {
         view = new Frame(this, new MainPanel(this));
@@ -25,6 +28,9 @@ public class Rechtschreibtrainer implements Controller {
         quiz = new Quiz(this, "test", "");
         quiz.addQuestion(new Question("test", null, "test", new ArrayList<>()));
         quiz.addQuestion(new Question("test2", null, "test2", new ArrayList<>()));
+        view.updateFontForAllComponents(view, font);
+
+        sl = new SaveLoad("." + File.pathSeparator + "Quizzes");
     }
 
 
@@ -42,6 +48,7 @@ public class Rechtschreibtrainer implements Controller {
             }
         }
         System.out.println(c);
+        if(c == null) throw new RuntimeException("Unknown ActionCommand: " + e.getActionCommand());
         switch (c) {
             case quiz:
 
@@ -58,6 +65,10 @@ public class Rechtschreibtrainer implements Controller {
                 break;
             case create:
                 view.getMainPanel().setCenterPanel(new CreatePanel(this, view));
+
+                String[] s = view.askForNewQuizName();
+                quiz = new Quiz(this, s[0], s[1]);
+
                 break;
             case enteredAnswer:
 
@@ -75,8 +86,13 @@ public class Rechtschreibtrainer implements Controller {
                 break;
             case hint:
                 break;
-            case submit_question:
+            case submitQuestion:
+                quiz.addQuestion(view.getCreatedQuestion());
+                view.showSnackbar("Frage wurde hinzugefügt!", Color.GREEN);
                 break;
+            case saveQuiz:
+                sl.save(quiz.getName() + ".quiz", quiz);
+                view.showSnackbar("Quiz wurde erstellt und gespeichert!", Color.GREEN);
         }
     }
 
@@ -91,6 +107,7 @@ public class Rechtschreibtrainer implements Controller {
 
     private void askQuestion() {
         view.getMainPanel().setCenterPanel(new QuestionPanel(this, game.getGameMode(), game.getRounds(), game.nextQuestion()));
+        view.updateFontForAllComponents(view, font);
     }
 
 }

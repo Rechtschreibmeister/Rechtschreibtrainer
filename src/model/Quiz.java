@@ -2,20 +2,21 @@ package model;
 
 import controller.Controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Quiz {
+public class Quiz implements Serializable {
     private String name;
     private String description;
     private final ArrayList<Question> questions = new ArrayList<Question>();
-    private final Controller controller;
+    //private final Controller controller;
 
 
     public Quiz(Controller controller, String name, String description) {
         setName(name);
         setDescription(description);
-        this.controller = controller;
+        //this.controller = controller;
     }
 
 
