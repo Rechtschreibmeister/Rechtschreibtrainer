@@ -3,8 +3,8 @@ package model;
 import controller.Controller;
 
 public class QuizMode extends Game {
-    public QuizMode(Quiz quiz, Statistic statistic) {
-        super(quiz, statistic, false);
+    public QuizMode(Quiz quiz) {
+        super(quiz, false);
     }
 
     @Override

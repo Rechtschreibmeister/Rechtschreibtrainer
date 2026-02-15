@@ -24,6 +24,7 @@ public class Rechtschreibtrainer implements Controller {
         statistic = new Statistic();
         quiz = new Quiz(this, "test", "");
         quiz.addQuestion(new Question("test", null, "test", new ArrayList<>()));
+        quiz.addQuestion(new Question("test2", null, "test2", new ArrayList<>()));
     }
 
 
@@ -45,7 +46,7 @@ public class Rechtschreibtrainer implements Controller {
             case quiz:
 
                 boolean gamemode = false;
-                game = new GameMode(quiz, statistic, this);
+                game = new GameMode(quiz, this);
                 view.getMainPanel().setCenterPanel(new QuestionPanel(this, gamemode, 1,  game.nextQuestion()));
                 break;
 
@@ -65,9 +66,11 @@ public class Rechtschreibtrainer implements Controller {
                 Question q = game.nextQuestion();
                 if(q == null){
                     // Falls es die letzte Frage war
-                    // TODO
+                    view.finishedQuiz(game);
+                    statistic.addStatistic(game.getStatistic());
                 }else {
-                    view.getMainPanel().setCenterPanel(new QuestionPanel(this, game.getGameMode(), 1, game.nextQuestion()));
+                    QuestionPanel qp = (QuestionPanel) view.getMainPanel().getCenterPanel();
+                    qp.updatePage(game.getStatistic().getQuestionsCorrect(), game.getStatistic().getWrongQuestions(), game.getQuestionNumber(), game.getTotalQuestions(), q);
                 }
                 break;
             case hint:
@@ -83,7 +86,7 @@ public class Rechtschreibtrainer implements Controller {
     }
 
     private void startQuiz(Quiz quiz, boolean gamemode) {
-        game = gamemode ? new GameMode(quiz, statistic, this) : new QuizMode(quiz, statistic);
+        game = gamemode ? new GameMode(quiz, this) : new QuizMode(quiz);
     }
 
     private void askQuestion() {

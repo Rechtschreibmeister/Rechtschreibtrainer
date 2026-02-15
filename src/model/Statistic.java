@@ -34,4 +34,9 @@ public class Statistic {
         }
     }
 
+    public void addStatistic(Statistic s){
+        totalQuestions += s.totalQuestions;
+        questionsCorrect += s.getQuestionsCorrect();
+    }
+
 }

@@ -9,9 +9,9 @@ public abstract class Game {
     private int questionNumber = -1;
     private final boolean gameMode;
 
-    public Game(Quiz quiz, Statistic statistic, boolean gameMode) {
+    public Game(Quiz quiz, boolean gameMode) {
         this.quiz = quiz;
-        this.statistic = statistic;
+        this.statistic = new Statistic();
         this.gameMode = gameMode;
     }
 
@@ -55,5 +55,17 @@ public abstract class Game {
 
     public int getRounds() {
         return quiz.getRounds();
+    }
+
+    public int getQuestionNumber(){
+        return questionNumber;
+    }
+
+    public int getTotalQuestions(){
+        return quiz.getRounds();
+    }
+
+    public Statistic getStatistic(){
+        return statistic;
     }
 }

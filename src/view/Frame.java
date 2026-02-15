@@ -1,6 +1,7 @@
 package view;
 
 import controller.Controller;
+import model.Game;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +11,8 @@ import java.awt.event.ActionListener;
 public class Frame extends JFrame {
 
     private final MainPanel mainpanel;
+    private Font f;
+
 
     public Frame(Controller controller, MainPanel panel) {
         super("Rechtschreibtrainer");
@@ -38,8 +41,8 @@ public class Frame extends JFrame {
         dialog.setVisible(true);*/
     }
 
-    public void finishedQuiz(){
-
+    public void finishedQuiz(Game g){
+        mainpanel.setCenterPanel(new StatisticsPanel(g.getStatistic()));
     }
 
 
@@ -69,4 +72,14 @@ public class Frame extends JFrame {
         timer.setRepeats(false);
         timer.start();
     }
+
+    public void updateFont(){
+        this.setFontRecursively(frame, new Font("Arial", Font.BOLD, 18));
+    }
+
+    public void updateFontForAllComponents(){
+        this.getComponents();
+    }
+
+
 }

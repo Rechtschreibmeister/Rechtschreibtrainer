@@ -10,9 +10,9 @@ public class GameMode extends Game {
 
     private int currentCombo = 0;
 
-    public GameMode(Quiz quiz, Statistic statistic, Controller controller) {
+    public GameMode(Quiz quiz, Controller controller) {
         Collections.shuffle(quiz.getQuestions(), controller.getRandom());
-        super(quiz, statistic, true);
+        super(quiz, true);
     }
 
     @Override
