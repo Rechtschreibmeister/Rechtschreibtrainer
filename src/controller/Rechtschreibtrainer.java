@@ -26,6 +26,7 @@ public class Rechtschreibtrainer implements Controller {
     private Font font = new Font(Font.SERIF, Font.BOLD, 30);
 
     private SaveLoad sl;
+    private String quizPath = "." + File.separator + "Quizzes";
 
     public Rechtschreibtrainer() {
         view = new Frame(this, new MainPanel(this));
@@ -35,7 +36,7 @@ public class Rechtschreibtrainer implements Controller {
         quiz.addQuestion(new Question("test2", null, "test2", new ArrayList<>()));
         view.updateFontForAllComponents(view, font);
 
-        sl = new SaveLoad("." + File.separator + "Quizzes");
+        sl = new SaveLoad(quizPath);
     }
 
 
@@ -54,17 +55,26 @@ public class Rechtschreibtrainer implements Controller {
         }
         System.out.println(c);
         if(c == null) throw new RuntimeException("Unknown ActionCommand: " + e.getActionCommand());
+        QuestionPanel qp = null;
+        Question question = null;
         switch (c) {
             case quiz:
 
-                boolean gamemode = false;
+                quiz = view.askForQuiz(quizPath, sl);
                 game = new QuizMode(quiz);
-                view.getMainPanel().setCenterPanel(new QuestionPanel(this, gamemode, 1,  game.nextQuestion()));
+                question = game.nextQuestion();
+                view.getMainPanel().setCenterPanel(new QuestionPanel(this, false, 1,  question));
+                //qp = (QuestionPanel) view.getMainPanel().getCenterPanel();
+                //qp.updatePage(game.getStatistic().getQuestionsCorrect(), game.getStatistic().getWrongQuestions(), game.getQuestionNumber(), game.getTotalQuestions(), question);
                 break;
 
             case game:
+                quiz = view.askForQuiz(quizPath, sl);
                 game = new GameMode(quiz, this);
-                view.getMainPanel().setCenterPanel(new QuestionPanel(this, true, 1,  game.nextQuestion()));
+                question = game.nextQuestion();
+                view.getMainPanel().setCenterPanel(new QuestionPanel(this, true, 1,  question));
+                //qp = (QuestionPanel) view.getMainPanel().getCenterPanel();
+                //qp.updatePage(game.getStatistic().getQuestionsCorrect(), game.getStatistic().getWrongQuestions(), game.getQuestionNumber(), game.getTotalQuestions(), question);
                 view.showSnackbar("Game Started", Color.green);
                 break;
             case stats:
@@ -87,12 +97,12 @@ public class Rechtschreibtrainer implements Controller {
                     view.finishedQuiz(game);
                     statistic.addStatistic(game.getStatistic());
                 }else {
-                    QuestionPanel qp = (QuestionPanel) view.getMainPanel().getCenterPanel();
+                    qp = (QuestionPanel) view.getMainPanel().getCenterPanel();
                     qp.updatePage(game.getStatistic().getQuestionsCorrect(), game.getStatistic().getWrongQuestions(), game.getQuestionNumber(), game.getTotalQuestions(), q);
                 }
                 break;
             case hint:
-                QuestionPanel qp = (QuestionPanel) view.getMainPanel().getCenterPanel();
+                qp = (QuestionPanel) view.getMainPanel().getCenterPanel();
                 qp.setHint(game.getNextHint());
                 break;
             case submitQuestion:

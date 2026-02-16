@@ -23,6 +23,7 @@ public class Image extends JPanel implements Serializable {
 
     public void updateImage(ImageIcon image) {
         if  (image != null) {
+            //System.out.println(image.getIconWidth() + " " + image.getIconHeight());
             int newWidth;
             int newHeight;
             double widthToHeight = (double) image.getIconWidth() / image.getIconHeight();
@@ -34,9 +35,10 @@ public class Image extends JPanel implements Serializable {
                 newWidth = (int) (newHeight * widthToHeight);
             }
             if (newWidth == 0 || newHeight == 0) {
-                newWidth = 1;
-                newHeight = 1;
+                newWidth = image.getIconWidth();
+                newHeight = image.getIconHeight();
             }
+            if(image.getImage() == null) return;
             image = new ImageIcon(image.getImage().getScaledInstance(newWidth, newHeight, 1));
             this.image = image;
             repaint();

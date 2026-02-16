@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Question implements Serializable {
     private String question;
-    private transient ImageIcon image;
+    private ImageIcon image;
     private String answer;
     private ArrayList<String> hints;
 
