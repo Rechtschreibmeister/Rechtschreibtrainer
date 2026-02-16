@@ -23,7 +23,7 @@ public class Rechtschreibtrainer implements Controller {
     private Quiz quiz;
 
     private Game game;
-    private Font font = new Font(Font.SERIF, Font.BOLD, 30);
+    private Font font = new Font(Font.SERIF, Font.BOLD, 20);
 
     private SaveLoad sl;
     private SaveLoad statSl;

@@ -58,9 +58,15 @@ public class Frame extends JFrame {
         snackbarDialog.setUndecorated(true);
         snackbarDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         snackbarDialog.setLayout(new BorderLayout());
+        snackbarDialog.setFont(new Font(Font.SERIF, Font.BOLD, 20));
+        snackbarDialog.setBackground(color.darker());
 
         JLabel messageLabel = new JLabel(message, SwingConstants.CENTER);
         messageLabel.setForeground(color);
+
+        messageLabel.setBackground(color.darker().darker());
+        messageLabel.setOpaque(true);
+
         messageLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         snackbarDialog.add(messageLabel, BorderLayout.CENTER);
 
@@ -98,8 +104,9 @@ public class Frame extends JFrame {
      * @return returns a String array, where index 0 is the name and index 1 the description of the Quiz
      */
     public String[] askForNewQuizName(){
-        String s = JOptionPane.showInputDialog("Geben Sie einen Namen und eine Beschreibung, getrennt von einem ',', für Ihr Quiz  ein:");
-        return new String[]{s.split(",")[0], s.substring(s.split(",")[0].length())};
+        String s = JOptionPane.showInputDialog("Geben Sie einen Namen und eine Beschreibung, getrennt von einem '#' für Ihr Quiz  ein:");
+        if(s == null) s = "#";
+        return new String[]{s.split("#")[0], s.substring(s.split("#")[0].length())};
     }
 
 
