@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FilenameFilter;
 
-import static java.io.File.separator;
 
 public class Frame extends JFrame {
 
