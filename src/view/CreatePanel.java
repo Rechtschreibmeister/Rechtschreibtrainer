@@ -54,9 +54,11 @@ public class CreatePanel extends JPanel {
         }
         fileChooser.setAlignmentX(Component.CENTER_ALIGNMENT);
         submit.setAlignmentX(Component.CENTER_ALIGNMENT);
+        saveQuiz.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         question.setMaximumSize(new Dimension(600, 25));
         answer.setMaximumSize(new Dimension(600, 25));
+        hints.setMaximumSize(new Dimension(600, 25));
 
         Image image = new Image();
 

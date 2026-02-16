@@ -2,7 +2,6 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
 public class Image extends JPanel implements Serializable {
@@ -32,9 +31,10 @@ public class Image extends JPanel implements Serializable {
             } else {
                 newHeight = getHeight();
                 newWidth = (int) (newHeight * widthToHeight);
-                // Temporär leeres Image, damit keine Null-Pointer Exception beim testen kommt
-                this.image = new ImageIcon(new BufferedImage(1, 1, BufferedImage.TYPE_3BYTE_BGR));
-                return;
+            }
+            if (newWidth == 0 || newHeight == 0) {
+                newWidth = 1;
+                newHeight = 1;
             }
             image = new ImageIcon(image.getImage().getScaledInstance(newWidth, newHeight, 1));
             this.image = image;

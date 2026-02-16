@@ -1,8 +1,6 @@
 package model;
 
 import javax.swing.*;
-import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +21,7 @@ public class Question implements Serializable {
         this.answer = answer;
         this.hints = hints;
         if(this.image == null){
-            this.image = new ImageIcon(new BufferedImage(1, 1, BufferedImage.TYPE_3BYTE_BGR));
+            this.image = new ImageIcon();
         }
     }
 
