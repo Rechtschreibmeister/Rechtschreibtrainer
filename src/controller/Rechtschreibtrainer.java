@@ -28,7 +28,6 @@ public class Rechtschreibtrainer implements Controller {
     private SaveLoad sl;
 
     public Rechtschreibtrainer() {
-        openURI("https://www.pussyspace.com/vid-5922384-she-plays-with-toys-in-the-car-while-her-husband-is-at-work/");
         view = new Frame(this, new MainPanel(this));
         statistic = new Statistic();
         quiz = new Quiz(this, "test", "");
