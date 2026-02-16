@@ -7,10 +7,15 @@ import view.Frame;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Rechtschreibtrainer implements Controller {
+    private static final String GITHUB_LINK = "https://github.com/sziehensack/Rechtschreibtrainer";
+    private static final String GUIDE_LINK = "https://biblehub.com/topical/s/scripture_as_a_guide_for_life.htm";
 
     private final Frame view;
     private Statistic statistic;
@@ -98,6 +103,13 @@ public class Rechtschreibtrainer implements Controller {
             case saveQuiz:
                 sl.save(quiz.getName() + ".quiz", quiz);
                 view.showSnackbar("Quiz wurde erstellt und gespeichert!", Color.GREEN);
+                break;
+            case help:
+                openURI(GUIDE_LINK);
+                break;
+            case github:
+                openURI(GITHUB_LINK);
+                break;
         }
     }
 
@@ -115,4 +127,26 @@ public class Rechtschreibtrainer implements Controller {
         view.updateFontForAllComponents(view, font);
     }
 
+    private void openURI(String uri) {
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            Desktop desktop = Desktop.getDesktop();
+            try {
+                desktop.browse(new URI(uri));
+            } catch (IOException | URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            Runtime runtime = Runtime.getRuntime();
+            try {
+                runtime.exec(new String[]{"xdg-open", uri});
+            } catch (IOException e) {
+                try {
+                    runtime.exec(new String[]{"open", uri});
+                }
+                catch (IOException e1) {
+                    throw new RuntimeException(e1);
+                }
+            }
+        }
+    }
 }
