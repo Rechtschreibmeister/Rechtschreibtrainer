@@ -111,6 +111,9 @@ public class Rechtschreibtrainer implements Controller {
                 }else {
                     qp = (QuestionPanel) view.getMainPanel().getCenterPanel();
                     qp.updatePage(game.getStatistic().getQuestionsCorrect(), game.getStatistic().getWrongQuestions(), game.getQuestionNumber(), game.getTotalQuestions(), q);
+                    if(game.getCombo() >= GameMode.COMBO_TRIGGER){
+                        view.showSnackbar("Du hast eine " + game.getCombo() + "er Combo!", Color.GREEN);
+                    }
                 }
                 break;
             case hint:

@@ -11,4 +11,9 @@ public class QuizMode extends Game {
     protected void increaseScore(boolean isCorrect) {
         addToScore(SCORE_PER_QUESTION);
     }
+
+    @Override
+    public int getCombo(){
+        return 0;
+    }
 }

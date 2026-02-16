@@ -87,4 +87,6 @@ public abstract class Game implements Serializable {
         statistic.setTotalHints(statistic.getTotalHints()+1);
         return s;
     }
+
+    public abstract int getCombo();
 }

@@ -5,8 +5,8 @@ import controller.Controller;
 import java.util.Collections;
 
 public class GameMode extends Game {
-    private static final int COMBO_TRIGGER = 2;
-    private final double COMBO_MULTIPLIER = 1.2;
+    public static final int COMBO_TRIGGER = 2;
+    public final double COMBO_MULTIPLIER = 1.2;
 
     private int currentCombo = 0;
 
@@ -24,7 +24,14 @@ public class GameMode extends Game {
         currentCombo++;
         if (currentCombo >= COMBO_TRIGGER) {
             addToScore(SCORE_PER_QUESTION * (int) Math.pow(COMBO_MULTIPLIER, currentCombo));
+        }else{
+            addToScore(SCORE_PER_QUESTION);
         }
         getStatistic().setScore(getScore());
+    }
+
+    @Override
+    public int getCombo(){
+        return currentCombo;
     }
 }
