@@ -30,7 +30,7 @@ public class Rechtschreibtrainer implements Controller {
         quiz.addQuestion(new Question("test2", null, "test2", new ArrayList<>()));
         view.updateFontForAllComponents(view, font);
 
-        sl = new SaveLoad("." + File.pathSeparator + "Quizzes");
+        sl = new SaveLoad("." + File.separator + "Quizzes");
     }
 
 
@@ -53,11 +53,14 @@ public class Rechtschreibtrainer implements Controller {
             case quiz:
 
                 boolean gamemode = false;
-                game = new GameMode(quiz, this);
+                game = new QuizMode(quiz);
                 view.getMainPanel().setCenterPanel(new QuestionPanel(this, gamemode, 1,  game.nextQuestion()));
                 break;
 
             case game:
+                game = new GameMode(quiz, this);
+                view.getMainPanel().setCenterPanel(new QuestionPanel(this, true, 1,  game.nextQuestion()));
+
                 view.showSnackbar("Game Started", Color.green);
                 break;
             case stats:
@@ -85,6 +88,8 @@ public class Rechtschreibtrainer implements Controller {
                 }
                 break;
             case hint:
+                QuestionPanel qp = (QuestionPanel) view.getMainPanel().getCenterPanel();
+                qp.setHint(game.getNextHint());
                 break;
             case submitQuestion:
                 quiz.addQuestion(view.getCreatedQuestion());

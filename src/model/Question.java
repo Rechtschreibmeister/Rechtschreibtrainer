@@ -32,4 +32,13 @@ public class Question implements Serializable {
     public String getQuestion() { return question; }
 
     public ImageIcon getImage() { return image; }
+
+    public String getHint(int i){
+        if(i >= hints.size()) return "";
+        return hints.get(i);
+    }
+
+    public int getHintLength() {
+        return hints.size();
+    }
 }

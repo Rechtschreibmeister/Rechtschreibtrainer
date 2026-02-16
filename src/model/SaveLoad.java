@@ -27,11 +27,10 @@ public class SaveLoad implements Serializable{
     }
 
     public void save(String name, Object obj) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path + File.pathSeparator + name))) {
 
-            //Wegen NotSerializableException
-            if(obj instanceof Quiz) oos.writeObject((Quiz) obj);
-            else oos.writeObject(obj);
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path + File.separator + name))) {
+            oos.writeObject(obj);
+            System.out.println(path + File.separator + name);
 
         } catch (IOException e) {
             System.out.println("Unable to save: " + e.getMessage());
