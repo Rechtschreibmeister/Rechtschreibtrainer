@@ -18,7 +18,7 @@ public class SaveLoad implements Serializable{
 
     public Object load(String name) {
         Object obj;
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path + File.pathSeparator + name))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path + File.separator + name))) {
             obj = ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);

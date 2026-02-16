@@ -26,6 +26,7 @@ public class Rechtschreibtrainer implements Controller {
     private Font font = new Font(Font.SERIF, Font.BOLD, 30);
 
     private SaveLoad sl;
+    private String quizSavePath = "." + File.separator + "Quizzes";
 
     public Rechtschreibtrainer() {
         view = new Frame(this, new MainPanel(this));
@@ -35,7 +36,7 @@ public class Rechtschreibtrainer implements Controller {
         quiz.addQuestion(new Question("test2", null, "test2", new ArrayList<>()));
         view.updateFontForAllComponents(view, font);
 
-        sl = new SaveLoad("." + File.separator + "Quizzes");
+        sl = new SaveLoad(quizSavePath);
     }
 
 
@@ -57,12 +58,14 @@ public class Rechtschreibtrainer implements Controller {
         switch (c) {
             case quiz:
 
-                boolean gamemode = false;
+                quiz = view.askForQuiz(quizSavePath, sl);
                 game = new QuizMode(quiz);
-                view.getMainPanel().setCenterPanel(new QuestionPanel(this, gamemode, 1,  game.nextQuestion()));
+                view.getMainPanel().setCenterPanel(new QuestionPanel(this, false, 1,  game.nextQuestion()));
                 break;
 
             case game:
+
+                quiz = view.askForQuiz(quizSavePath, sl);
                 game = new GameMode(quiz, this);
                 view.getMainPanel().setCenterPanel(new QuestionPanel(this, true, 1,  game.nextQuestion()));
 

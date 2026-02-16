@@ -3,11 +3,17 @@ package view;
 import controller.Controller;
 import model.Game;
 import model.Question;
+import model.Quiz;
+import model.SaveLoad;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FilenameFilter;
+
+import static java.io.File.separator;
 
 public class Frame extends JFrame {
 
@@ -107,4 +113,22 @@ public class Frame extends JFrame {
         CreatePanel c = (CreatePanel) j;
         return c.generateQuestion();
     }
+
+    public Quiz askForQuiz(String path, SaveLoad sl){
+        Quiz q = null;
+        FileDialog fd = new FileDialog(this, "Wählen Sie ein Quiz aus:", FileDialog.LOAD);
+        fd.setDirectory(path);
+
+        fd.setFilenameFilter(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                name = name.toLowerCase();
+                return name.endsWith(".quiz");
+            }
+        });
+        fd.setVisible(true);
+        String fileName = fd.getFile();
+        return (Quiz) sl.load(fileName);
+    }
+
 }
