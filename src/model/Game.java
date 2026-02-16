@@ -16,6 +16,11 @@ public abstract class Game implements Serializable {
     public Game(Quiz quiz, boolean gameMode) {
         this.quiz = quiz;
         this.statistic = new Statistic();
+        if (gameMode) {
+            statistic.setGamesPlayed(statistic.getGamesPlayed() + 1);
+        } else {
+            statistic.setQuizPlayed(statistic.getQuizPlayed() + 1);
+        }
         this.gameMode = gameMode;
     }
 
@@ -79,6 +84,7 @@ public abstract class Game implements Serializable {
         String s = quiz.getQuestion(questionNumber).getHint(currentHint);
         currentHint++;
         if(currentHint > quiz.getQuestion(questionNumber).getHintLength()) currentHint = 0;
+        statistic.setTotalHints(statistic.getTotalHints()+1);
         return s;
     }
 }

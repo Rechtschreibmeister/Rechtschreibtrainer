@@ -23,6 +23,8 @@ public class CreatePanel extends JPanel {
     String fileName = null;
     String filePath = null;
 
+    public static final String defaultImage = ".\\Quizzes\\Images\\default.png";
+
     public CreatePanel(Controller controller, JFrame frame) {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
@@ -112,7 +114,9 @@ public class CreatePanel extends JPanel {
     }
 
     public ImageIcon getImage() {
-        return new ImageIcon(filePath + separator + fileName);
+
+        ImageIcon i = new File(filePath + separator + fileName).exists() ? new ImageIcon(filePath + separator + fileName) : new ImageIcon(defaultImage);
+        return i;
     }
 
     public String[] getHints(){

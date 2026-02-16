@@ -49,7 +49,7 @@ public class Frame extends JFrame {
     }
 
     public void finishedQuiz(Game g){
-        mainpanel.setCenterPanel(new StatisticsPanel(g.getStatistic()));
+        mainpanel.setCenterPanel(new StatisticsPanel(g.getStatistic(), false));
     }
 
 

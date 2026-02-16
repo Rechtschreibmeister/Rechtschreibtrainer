@@ -26,11 +26,22 @@ public class Rechtschreibtrainer implements Controller {
     private Font font = new Font(Font.SERIF, Font.BOLD, 30);
 
     private SaveLoad sl;
+    private SaveLoad statSl;
     private String quizPath = "." + File.separator + "Quizzes";
+    private String statPath = "." + File.separator + "Statistic";
+    private String statSaveName = "statistics.stats";
 
     public Rechtschreibtrainer() {
         view = new Frame(this, new MainPanel(this));
-        statistic = new Statistic();
+
+        statSl = new SaveLoad(statPath);
+        try {
+            statistic = (Statistic) statSl.load(statSaveName);
+        }catch(Exception e){
+            statistic = new Statistic();
+            statSl.save(statSaveName, statistic);
+        }
+
         quiz = new Quiz(this, "test", "");
         quiz.addQuestion(new Question("test", null, "test", new ArrayList<>()));
         quiz.addQuestion(new Question("test2", null, "test2", new ArrayList<>()));
@@ -78,7 +89,7 @@ public class Rechtschreibtrainer implements Controller {
                 view.showSnackbar("Game Started", Color.green);
                 break;
             case stats:
-                view.getMainPanel().setCenterPanel(new StatisticsPanel(statistic));
+                view.getMainPanel().setCenterPanel(new StatisticsPanel(statistic, true));
                 break;
             case create:
                 view.getMainPanel().setCenterPanel(new CreatePanel(this, view));
@@ -96,6 +107,7 @@ public class Rechtschreibtrainer implements Controller {
                     // Falls es die letzte Frage war
                     view.finishedQuiz(game);
                     statistic.addStatistic(game.getStatistic());
+                    statSl.save(statSaveName, statistic);
                 }else {
                     qp = (QuestionPanel) view.getMainPanel().getCenterPanel();
                     qp.updatePage(game.getStatistic().getQuestionsCorrect(), game.getStatistic().getWrongQuestions(), game.getQuestionNumber(), game.getTotalQuestions(), q);

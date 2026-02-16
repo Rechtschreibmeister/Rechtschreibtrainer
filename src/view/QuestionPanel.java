@@ -71,7 +71,6 @@ public class QuestionPanel extends JPanel {
         main.add(this.img);
         main.add(this.question);
         main.add(userInput);
-        main.add(newHint);
         main.add(this.hint);
 
         this.add(main, BorderLayout.CENTER);

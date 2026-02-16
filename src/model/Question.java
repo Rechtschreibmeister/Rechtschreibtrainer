@@ -1,6 +1,10 @@
 package model;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +24,6 @@ public class Question implements Serializable {
         this.image = image;
         this.answer = answer;
         this.hints = hints;
-        if(this.image == null){
-            this.image = new ImageIcon();
-        }
     }
 
     public String getAnswer() {

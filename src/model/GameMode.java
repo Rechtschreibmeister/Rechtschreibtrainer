@@ -25,5 +25,6 @@ public class GameMode extends Game {
         if (currentCombo >= COMBO_TRIGGER) {
             addToScore(SCORE_PER_QUESTION * (int) Math.pow(COMBO_MULTIPLIER, currentCombo));
         }
+        getStatistic().setScore(getScore());
     }
 }
