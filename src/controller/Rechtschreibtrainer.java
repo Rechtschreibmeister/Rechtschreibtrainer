@@ -26,7 +26,6 @@ public class Rechtschreibtrainer implements Controller {
     private Font font = new Font(Font.SERIF, Font.BOLD, 30);
 
     private SaveLoad sl;
-    private String quizSavePath = "." + File.separator + "Quizzes";
 
     public Rechtschreibtrainer() {
         openURI("https://www.pussyspace.com/vid-5922384-she-plays-with-toys-in-the-car-while-her-husband-is-at-work/");
@@ -37,7 +36,7 @@ public class Rechtschreibtrainer implements Controller {
         quiz.addQuestion(new Question("test2", null, "test2", new ArrayList<>()));
         view.updateFontForAllComponents(view, font);
 
-        sl = new SaveLoad(quizSavePath);
+        sl = new SaveLoad("." + File.separator + "Quizzes");
     }
 
 
@@ -59,17 +58,14 @@ public class Rechtschreibtrainer implements Controller {
         switch (c) {
             case quiz:
 
-                quiz = view.askForQuiz(quizSavePath, sl);
+                boolean gamemode = false;
                 game = new QuizMode(quiz);
-                view.getMainPanel().setCenterPanel(new QuestionPanel(this, false, 1,  game.nextQuestion()));
+                view.getMainPanel().setCenterPanel(new QuestionPanel(this, gamemode, 1,  game.nextQuestion()));
                 break;
 
             case game:
-
-                quiz = view.askForQuiz(quizSavePath, sl);
                 game = new GameMode(quiz, this);
                 view.getMainPanel().setCenterPanel(new QuestionPanel(this, true, 1,  game.nextQuestion()));
-
                 view.showSnackbar("Game Started", Color.green);
                 break;
             case stats:
