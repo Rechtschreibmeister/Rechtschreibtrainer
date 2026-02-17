@@ -23,7 +23,6 @@ public class Frame extends JFrame {
     public Frame(Controller controller, MainPanel panel) {
         super("Rechtschreibtrainer");
         this.mainpanel = panel;
-        Image.initImage();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1280, 720);
         this.setResizable(true);
